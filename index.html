@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VI Print — 3D-печать уникальных и полезных вещей.">
+    <title>VI Print — 3D-печать</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0d0f11;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 15, 17, 0.92);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #25292d;
+        }
+
+        .header-inner {
+            min-height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: #ff6a22;
+            font-size: 15px;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+            color: #aeb3b8;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        nav a {
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 100px 0 90px;
+            text-align: center;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(255, 106, 34, 0.16),
+                    transparent 38%
+                );
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 13px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 106, 34, 0.35);
+            background: rgba(255, 106, 34, 0.08);
+            color: #ff9b68;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            margin: 22px auto 18px;
+            font-size: clamp(44px, 7vw, 78px);
+            line-height: 0.98;
+            letter-spacing: -5px;
+        }
+
+        .hero h1 span {
+            color: #ff6a22;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #9ca2a8;
+            font-size: 18px;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            margin-top: 30px;
+            padding: 14px 21px;
+            border-radius: 14px;
+            background: #ff6a22;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 12px 30px rgba(255, 106, 34, 0.2);
+            transition: 0.2s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-2px);
+            background: #ff7c3d;
+        }
+
+        /* CATALOG */
+
+        .catalog {
+            padding: 30px 0 100px;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            letter-spacing: -2px;
+        }
+
+        .section-title p {
+            margin-top: 7px;
+            color: #8e959c;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .product {
+            overflow: hidden;
+            background: #16191c;
+            border: 1px solid #292e33;
+            border-radius: 24px;
+            transition: 0.25s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            border-color: #3b4248;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        .product-media {
+            width: 100%;
+            height: 390px;
+            overflow: hidden;
+            background: #111315;
+        }
+
+        .product-media img,
+        .product-media video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 23px;
+        }
+
+        .product-tag {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 30px;
+            border: 1px solid #30353a;
+            color: #aeb4ba;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .product h3 {
+            margin: 13px 0 6px;
+            font-size: 25px;
+            letter-spacing: -1px;
+        }
+
+        .product-description {
+            color: #939aa1;
+            font-size: 14px;
+            min-height: 43px;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .order-button {
+            padding: 12px 17px;
+            border-radius: 13px;
+            background: #ff6a22;
+            font-size: 13px;
+            font-weight: 900;
+            transition: 0.2s;
+        }
+
+        .order-button:hover {
+            background: #ff7c3d;
+            transform: translateY(-1px);
+        }
+
+        /* CONTACTS */
+
+        .contacts {
+            padding: 0 0 90px;
+        }
+
+        .contact-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            padding: 28px;
+            border: 1px solid #292e33;
+            border-radius: 24px;
+            background: #16191c;
+        }
+
+        .contact-box h2 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .contact-box p {
+            color: #9299a0;
+            font-size: 14px;
+        }
+
+        .email {
+            color: #ff8d53;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 28px 0;
+            border-top: 1px solid #24282c;
+            color: #737a81;
+            font-size: 12px;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 70px 0 65px;
+            }
+
+            .hero h1 {
+                font-size: 46px;
+                letter-spacing: -3px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .product-media {
+                height: 300px;
+            }
+
+            .contact-box {
+                display: block;
+            }
+
+            .contact-box .order-button {
+                display: inline-block;
+                margin-top: 18px;
+            }
+
+            .footer-inner {
+                display: block;
+            }
+
+            .footer-inner div + div {
+                margin-top: 7px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container header-inner">
+
+        <a href="#" class="logo">
+            <span class="logo-mark">VI</span>
+            <span>PRINT</span>
+        </a>
+
+        <nav>
+            <a href="#catalog">Каталог</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <span class="badge">
+                3D-печать · VI Print
+            </span>
+
+            <h1>
+                Печатаем то, чего
+                <span>нет в магазинах.</span>
+            </h1>
+
+            <p>
+                Уникальные 3D-печатные вещи для себя, дома и в подарок.
+                Выберите товар и оформите заказ через Telegram.
+            </p>
+
+            <a
+                class="hero-button"
+                href="https://t.me/viprinterrr_bot"
+                target="_blank"
+                rel="noopener"
+            >
+                Заказать в Telegram →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATALOG -->
+
+    <section class="catalog" id="catalog">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Каталог</h2>
+
+                <p>
+                    Два товара VI Print в наличии.
+                </p>
+            </div>
+
+
+            <div class="products">
+
+                <!-- ТОВАР 1 -->
+
+                <article class="product">
+
+                    <div class="product-media">
+                        <img
+                            src="svistok.png"
+                            alt="Свисток Гроза V3"
+                        >
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-tag">
+                            Свисток
+                        </span>
+
+                        <h3>
+                            Свисток «Гроза V3»
+                        </h3>
+
+                        <p class="product-description">
+                            Компактный 3D-печатный свисток
+                            с выразительным дизайном.
+                        </p>
+
+                        <div class="product-bottom">
+
+                            <span class="price">
+                                200 ₽
+                            </span>
+
+                            <a
+                                class="order-button"
+                                href="https://t.me/viprinterrr_bot?start=svistok_v3"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                Заказать →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ТОВАР 2 -->
+
+                <article class="product">
+
+                    <div class="product-media">
+
+                        <video
+                            controls
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata"
+                        >
+                            <source
+                                src="spiral.mp4"
+                                type="video/mp4"
+                            >
+
+                            Ваш браузер не поддерживает видео.
+
+                        </video>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-tag">
+                            Антистресс
+                        </span>
+
+                        <h3>
+                            Спиральная виджет-игрушка
+                        </h3>
+
+                        <p class="product-description">
+                            Тактильная спиральная игрушка
+                            для рук и небольшого отдыха.
+                        </p>
+
+                        <div class="product-bottom">
+
+                            <span class="price">
+                                350 ₽
+                            </span>
+
+                            <a
+                                class="order-button"
+                                href="https://t.me/viprinterrr_bot?start=spiral"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                Заказать →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACTS -->
+
+    <section class="contacts" id="contacts">
+
+        <div class="container">
+
+            <div class="contact-box">
+
+                <div>
+
+                    <h2>
+                        Есть вопросы?
+                    </h2>
+
+                    <p>
+                        Заказы принимаем через Telegram.
+                        Почта:
+                        <a
+                            class="email"
+                            href="mailto:viprinterr@gmail.com"
+                        >
+                            viprinterr@gmail.com
+                        </a>
+                    </p>
+
+                </div>
+
+                <a
+                    class="order-button"
+                    href="https://t.me/viprinterrr_bot"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Написать в Telegram →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div>
+            <span class="footer-brand">
+                VI PRINT
+            </span>
+            · 3D-печать
+        </div>
+
+        <div>
+            © 2026 VI Print · Россия
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+  </html>
