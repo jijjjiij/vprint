@@ -74,7 +74,8 @@
 
         nav {
             display: flex;
-            gap: 28px;
+            align-items: center;
+            gap: 24px;
             color: #aeb3b8;
             font-size: 14px;
             font-weight: 700;
@@ -86,6 +87,13 @@
 
         nav a:hover {
             color: #ffffff;
+        }
+
+        .nav-channel {
+            padding: 9px 13px;
+            border-radius: 10px;
+            background: #ff6a22;
+            color: #ffffff !important;
         }
 
         /* HERO */
@@ -133,9 +141,16 @@
             font-size: 18px;
         }
 
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
         .hero-button {
             display: inline-flex;
-            margin-top: 30px;
             padding: 14px 21px;
             border-radius: 14px;
             background: #ff6a22;
@@ -148,6 +163,16 @@
         .hero-button:hover {
             transform: translateY(-2px);
             background: #ff7c3d;
+        }
+
+        .hero-button.secondary {
+            background: #191d20;
+            border: 1px solid #30353a;
+            box-shadow: none;
+        }
+
+        .hero-button.secondary:hover {
+            background: #22272b;
         }
 
         /* CATALOG */
@@ -247,6 +272,7 @@
         }
 
         .order-button {
+            display: inline-block;
             padding: 12px 17px;
             border-radius: 13px;
             background: #ff6a22;
@@ -291,6 +317,30 @@
             color: #ff8d53;
         }
 
+        .telegram-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .telegram-link {
+            display: inline-block;
+            padding: 10px 13px;
+            border: 1px solid #30353a;
+            border-radius: 11px;
+            color: #dce0e3;
+            background: #111416;
+            font-size: 12px;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .telegram-link:hover {
+            border-color: #ff6a22;
+            color: #ff9a67;
+        }
+
         /* FOOTER */
 
         footer {
@@ -314,6 +364,7 @@
         /* MOBILE */
 
         @media (max-width: 700px) {
+
             nav {
                 display: none;
             }
@@ -362,6 +413,7 @@
 <body>
 
 <header>
+
     <div class="container header-inner">
 
         <a href="#" class="logo">
@@ -370,11 +422,28 @@
         </a>
 
         <nav>
-            <a href="#catalog">Каталог</a>
-            <a href="#contacts">Контакты</a>
+
+            <a href="#catalog">
+                Каталог
+            </a>
+
+            <a href="#contacts">
+                Контакты
+            </a>
+
+            <a
+                class="nav-channel"
+                href="https://t.me/VIprinterr"
+                target="_blank"
+                rel="noopener"
+            >
+                Telegram-канал
+            </a>
+
         </nav>
 
     </div>
+
 </header>
 
 
@@ -400,14 +469,27 @@
                 Выберите товар и оформите заказ через Telegram.
             </p>
 
-            <a
-                class="hero-button"
-                href="https://t.me/viprinterrr_bot"
-                target="_blank"
-                rel="noopener"
-            >
-                Заказать в Telegram →
-            </a>
+            <div class="hero-buttons">
+
+                <a
+                    class="hero-button"
+                    href="https://t.me/viprinterrr_bot"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Заказать в Telegram →
+                </a>
+
+                <a
+                    class="hero-button secondary"
+                    href="https://t.me/VIprinterr"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Наш Telegram-канал
+                </a>
+
+            </div>
 
         </div>
 
@@ -421,25 +503,32 @@
         <div class="container">
 
             <div class="section-title">
-                <h2>Каталог</h2>
+
+                <h2>
+                    Каталог
+                </h2>
 
                 <p>
                     Два товара VI Print в наличии.
                 </p>
+
             </div>
 
 
             <div class="products">
+
 
                 <!-- ТОВАР 1 -->
 
                 <article class="product">
 
                     <div class="product-media">
+
                         <img
                             src="svistok.png"
                             alt="Свисток Гроза V3"
                         >
+
                     </div>
 
                     <div class="product-info">
@@ -493,6 +582,7 @@
                             playsinline
                             preload="metadata"
                         >
+
                             <source
                                 src="spiral.mp4"
                                 type="video/mp4"
@@ -540,6 +630,7 @@
 
                 </article>
 
+
             </div>
 
         </div>
@@ -558,11 +649,14 @@
                 <div>
 
                     <h2>
-                        Есть вопросы?
+                        Контакты
                     </h2>
 
                     <p>
                         Заказы принимаем через Telegram.
+                    </p>
+
+                    <p>
                         Почта:
                         <a
                             class="email"
@@ -572,16 +666,29 @@
                         </a>
                     </p>
 
-                </div>
+                    <div class="telegram-links">
 
-                <a
-                    class="order-button"
-                    href="https://t.me/viprinterrr_bot"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Написать в Telegram →
-                </a>
+                        <a
+                            class="telegram-link"
+                            href="https://t.me/viprinterrr_bot"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            🤖 Написать боту
+                        </a>
+
+                        <a
+                            class="telegram-link"
+                            href="https://t.me/VIprinterr"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📢 Telegram-канал
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -612,4 +719,4 @@
 </footer>
 
 </body>
-  </html>
+</html>
