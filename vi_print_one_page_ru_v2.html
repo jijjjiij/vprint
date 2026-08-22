@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VI Print — кастомная 3D-печать. Свистки Thunderstorm V3, антистресс-игрушки, органайзеры, брелоки и другие полезные модели." />
+  <title>VI Print — 3D-печать того, чего нет в магазинах</title>
+  <style>
+:root{
+  --bg:#0b0d0f;
+  --bg-2:#101316;
+  --card:#15191d;
+  --card-2:#1a1f24;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.14);
+  --text:#f7f7f4;
+  --muted:#9ea5ad;
+  --muted-2:#707780;
+  --orange:#ff6a22;
+  --orange-2:#ff8d4d;
+  --orange-soft:rgba(255,106,34,.12);
+  --green:#b8f3ca;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:24px;
+  --max:1200px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 88% 0%,rgba(255,106,34,.13),transparent 24%),
+    radial-gradient(circle at 0% 20%,rgba(255,255,255,.035),transparent 24%),
+    var(--bg);
+  line-height:1.5;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 70%);
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(var(--max),calc(100% - 34px));margin:0 auto}
+
+.nav{
+  position:sticky;top:0;z-index:40;
+  backdrop-filter:blur(18px);
+  background:rgba(11,13,15,.74);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:950;letter-spacing:-.05em}
+.logo-mark{
+  width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--orange-2),var(--orange));
+  color:#fff;box-shadow:0 12px 30px rgba(255,106,34,.24)
+}
+.menu{display:flex;align-items:center;gap:26px}
+.menu a{color:#c8cdd1;font-size:14px;font-weight:700;transition:.2s}
+.menu a:hover{color:#fff}
+.nav-cta{padding:11px 16px;border-radius:999px;background:#fff;color:#121416!important}
+
+.hero{padding:78px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.eyebrow,.pill{
+  display:inline-flex;align-items:center;gap:8px;border-radius:999px;
+  font-size:11px;letter-spacing:.09em;font-weight:900;text-transform:uppercase
+}
+.eyebrow{padding:8px 12px;color:#ffb694;border:1px solid rgba(255,106,34,.22);background:var(--orange-soft)}
+.pill{padding:7px 10px;color:#c3c8cd;border:1px solid var(--line);background:rgba(255,255,255,.035)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 5px rgba(255,106,34,.09)}
+h1{font-size:clamp(46px,7vw,86px);line-height:.95;letter-spacing:-.07em;margin:18px 0 24px;max-width:780px}
+h1 span{color:var(--orange)}
+.hero p{font-size:18px;color:var(--muted);max-width:640px;margin:0 0 28px}
+.hero-actions{display:flex;gap:11px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:50px;padding:0 18px;border-radius:14px;font-weight:900;
+  border:1px solid transparent;transition:.2s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 14px 32px rgba(255,106,34,.2)}
+.btn-secondary{background:rgba(255,255,255,.045);border-color:var(--line-strong);color:#fff}
+.hero-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px;color:#aab0b6;font-size:12px;font-weight:700}
+.hero-meta span{display:flex;align-items:center;gap:7px}
+
+.hero-visual{min-height:500px;position:relative}
+.visual-frame{
+  position:absolute;inset:0;border-radius:32px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(circle at 72% 34%,rgba(255,106,34,.18),transparent 28%),
+    radial-gradient(circle at 20% 86%,rgba(255,255,255,.04),transparent 26%),
+    linear-gradient(145deg,#171a1e,#0f1114);
+  box-shadow:var(--shadow)
+}
+.grid-lines{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(to bottom,transparent 5%,black 22%,black 86%,transparent 100%)
+}
+.product-orb{
+  position:absolute;width:310px;height:310px;right:8%;top:11%;border-radius:42%;
+  transform:rotate(19deg);
+  background:linear-gradient(145deg,#ffb38e 0%,#ff6a22 45%,#aa3609 100%);
+  box-shadow:0 45px 80px rgba(255,106,34,.26),inset -30px -30px 60px rgba(60,10,0,.18);
+}
+.product-orb:before{
+  content:"";position:absolute;width:184px;height:184px;left:63px;top:63px;border-radius:50%;
+  border:26px solid rgba(17,19,21,.94);box-shadow:inset 0 0 0 8px rgba(255,255,255,.09)
+}
+.product-orb:after{
+  content:"";position:absolute;width:120px;height:30px;left:95px;top:128px;border-radius:999px;background:#0e1012;
+  box-shadow:0 0 0 8px rgba(255,255,255,.06)
+}
+.tag-card{
+  position:absolute;left:7%;bottom:8%;max-width:260px;padding:18px;border-radius:19px;
+  background:rgba(15,17,20,.78);border:1px solid var(--line-strong);backdrop-filter:blur(12px);
+}
+.tag-card strong{font-size:14px}.tag-card p{margin:5px 0 0;color:#969da5;font-size:12px}
+.floating-chip{
+  position:absolute;right:6%;bottom:12%;padding:10px 13px;border-radius:999px;
+  background:#f7f7f4;color:#141619;font-size:11px;font-weight:950;transform:rotate(-3deg);box-shadow:0 14px 25px rgba(0,0,0,.2)
+}
+.hero-badge{
+  position:absolute;left:8%;top:7%;padding:10px 12px;border-radius:14px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:11px;color:#cbd0d5;font-weight:800
+}
+
+section{padding:90px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:26px;margin-bottom:30px}
+.section-head h2{margin:0;font-size:clamp(32px,4.4vw,48px);letter-spacing:-.06em}
+.section-head p{margin:0;max-width:520px;color:var(--muted);font-size:14px}
+
+.catalog-wrap{
+  border-top:1px solid rgba(255,255,255,.05);
+  padding-top:28px;
+}
+.catalog-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.catalog-tab{
+  padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:#adb3b8;font-size:12px;font-weight:900;cursor:pointer
+}
+.catalog-tab.active{background:var(--orange);border-color:var(--orange);color:#fff}
+.products{display:grid;grid-template-columns:repeat(12,1fr);gap:17px}
+.product{
+  grid-column:span 4;
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#181c20,#13171a);
+  box-shadow:0 10px 40px rgba(0,0,0,.2);display:flex;flex-direction:column;min-height:100%;
+  transition:.25s ease;
+}
+.product:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.15);box-shadow:0 22px 55px rgba(0,0,0,.3)}
+.product.featured{grid-column:span 8}
+.product.featured .product-art{height:330px}
+.product-art{
+  height:250px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 70% 26%,rgba(255,106,34,.13),transparent 24%),
+    linear-gradient(145deg,#1a1f24,#0f1215)
+}
+.product-art:after{
+  content:"";position:absolute;inset:auto 0 0;height:34%;
+  background:linear-gradient(to top,rgba(9,11,13,.55),transparent);pointer-events:none
+}
+.product-body{padding:19px 19px 20px;display:flex;flex-direction:column;flex:1}
+.product-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.product h3{margin:12px 0 7px;font-size:21px;letter-spacing:-.03em}
+.product p{margin:0;color:var(--muted);font-size:13px;min-height:40px}
+.product-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
+.price{font-size:15px;font-weight:950}
+.small-btn{padding:10px 14px;border-radius:12px;background:var(--orange);font-size:12px;font-weight:950}
+
+.why{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.why-card,.about-card,.contact-card{
+  border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#181c20,#14181b);padding:25px;
+  box-shadow:0 12px 35px rgba(0,0,0,.18)
+}
+.why-card h3{margin:12px 0 7px;font-size:24px;letter-spacing:-.04em}
+.why-card p,.about-card p{margin:0;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.step{position:relative;border:1px solid var(--line);border-radius:18px;padding:17px;background:rgba(255,255,255,.025)}
+.step-num{width:34px;height:34px;border-radius:10px;background:var(--orange-soft);color:#ffad82;display:grid;place-items:center;font-weight:950}
+.step h4{margin:15px 0 6px}.step p{margin:0;color:var(--muted);font-size:12px}
+
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:17px}
+.specs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.spec{padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}
+.spec small{display:block;color:#7f878f;text-transform:uppercase;letter-spacing:.08em;font-size:10px}
+.spec strong{display:block;margin-top:4px;font-size:14px}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.contact-list{display:grid;gap:10px;margin-top:18px}
+.contact-item{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02)}
+.icon{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:var(--orange-soft);color:#ffad82;font-weight:900}
+.contact-item small{display:block;color:#7e858c;font-size:10px}.contact-item strong{font-size:13px}
+.form{display:grid;gap:10px}
+.field{width:100%;border:1px solid var(--line);background:#101316;color:#fff;border-radius:14px;padding:13px 14px;font:inherit;outline:none}
+.field:focus{border-color:rgba(255,106,34,.58);box-shadow:0 0 0 4px rgba(255,106,34,.08)}
+textarea.field{min-height:110px;resize:vertical}
+.form-note{font-size:10px!important;color:#70777f!important}
+
+footer{padding:26px 0 44px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px;color:#767d84;font-size:11px}
+.footer-logo{color:#fff;font-weight:950;letter-spacing:.04em}
+.float-chat{
+  position:fixed;right:18px;bottom:18px;z-index:50;width:58px;height:58px;border-radius:50%;
+  display:grid;place-items:center;background:var(--orange);box-shadow:0 18px 40px rgba(255,106,34,.32);
+  border:4px solid rgba(11,13,15,.92);font-size:21px
+}
+@media(max-width:980px){
+  .menu{display:none}
+  .hero-grid,.about-grid,.contact-grid,.why{grid-template-columns:1fr}
+  .hero-visual{min-height:410px}
+  .product,.product.featured{grid-column:span 6}
+  .product.featured .product-art{height:280px}
+  .steps{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+  .container{width:min(var(--max),calc(100% - 24px))}
+  .nav-inner{height:68px}
+  .hero{padding:55px 0 42px}
+  .hero p{font-size:16px}
+  .hero-visual{min-height:330px}
+  .product,.product.featured{grid-column:span 12}
+  .product.featured .product-art,.product-art{height:230px}
+  .steps{grid-template-columns:1fr}
+  section{padding:72px 0}
+  .section-head{display:block}
+  .section-head p{margin-top:11px}
+  .specs{grid-template-columns:1fr 1fr}
+  .footer-row{flex-direction:column;align-items:flex-start}
+}
+.category-label{font-size:10px;color:#80878e;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.product-top .pill{flex:none}</style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#home" aria-label="VI Print">
+        <span class="logo-mark">VI</span>
+        <span>PRINT</span>
+      </a>
+      <nav class="menu" aria-label="Основное меню">
+        <a href="#home">Главная</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#about">О нас</a>
+        <a href="#contacts">Контакты</a>
+        <a class="nav-cta" href="https://t.me/viprinterrr_bot" target="_blank" rel="noopener">Заказать</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> 3D-печать · Россия</span>
+          <h1>Печатаем то, чего <span>не найти</span> в магазинах.</h1>
+          <p>VI Print создаёт уникальные и полезные вещи на 3D-принтере — от громких свистков до органайзеров и игрушек-антистрессов.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#catalog">Смотреть каталог ↗</a>
+            <a class="btn btn-secondary" href="https://t.me/viprinterrr_bot" target="_blank" rel="noopener">Написать в Telegram</a>
+          </div>
+          <div class="hero-meta">
+            <span><span class="dot"></span> PLA / PETG</span>
+            <span><span class="dot"></span> Bambu Lab A1</span>
+            <span><span class="dot"></span> Доставка по России</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Визуализация 3D-печатного свистка">
+          <div class="visual-frame"></div><div class="hero-badge">BAMBU LAB A1 · PLA / PETG</div>
+          <div class="grid-lines"></div>
+          <div class="product-orb"></div>
+          <div class="tag-card">
+            <strong>Thunderstorm V3</strong>
+            <p>Характерный дизайн. Чёткая печать. Сделано с вниманием к деталям.</p>
+          </div>
+          <div class="floating-chip">НАПЕЧАТАНО НА 3D-ПРИНТЕРЕ</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog" id="catalog">
+      <div class="container">
+        <div class="section-head">
+          <h2>Каталог</h2>
+          <p>Выбирай готовую модель или напиши нам — поможем подобрать вариант под подарок, дом, рюкзак или рабочее место.</p>
+        </div>
+
+        <div class="catalog-wrap">
+  <div class="catalog-tabs">
+    <span class="catalog-tab active">Все</span>
+    <span class="catalog-tab">Свистки</span>
+    <span class="catalog-tab">Антистресс</span>
+    <span class="catalog-tab">Для дома</span>
+    <span class="catalog-tab">Подарки</span>
+  </div>
+  <div class="products">
+<article class="product featured">
+            <div class="product-art">
+              <svg viewBox="0 0 500 280" aria-hidden="true">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ffad7d"/><stop offset="1" stop-color="#ff5e12"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(80,20) rotate(-12 160 100)">
+                  <path d="M40 100 Q125 35 248 70 L295 91 Q311 100 295 109 L248 130 Q125 165 40 100Z" fill="url(#g1)"/>
+                  <ellipse cx="278" cy="100" rx="42" ry="26" fill="#181a1c"/>
+                  <ellipse cx="278" cy="100" rx="21" ry="11" fill="#0f1011"/>
+                  <circle cx="92" cy="100" r="18" fill="#151719"/>
+                  <circle cx="92" cy="100" r="8" fill="#2b2f34"/>
+                  <path d="M45 94 L15 86 L15 114 L45 106Z" fill="#ff8c52"/>
+                </g>
+              </svg>
+            </div>
+            <div class="product-body"><div class="product-top">
+              <span class="pill">ХИТ</span><span class="category-label">Свистки</span></div>
+              <h3>Thunderstorm V3</h3>
+              <p>Фирменный свисток VI Print с выразительным звуком и акцентом на геометрию.</p>
+              <div class="product-foot">
+                <span class="price">от 490 ₽</span>
+                <a class="small-btn" href="https://t.me/viprinterrr_bot?start=thunderstorm_v3" target="_blank" rel="noopener">Заказать</a>
+              </div>
+            </div>
+          </article>
+<article class="product">
+            <div class="product-art">
+              <svg viewBox="0 0 500 280" aria-hidden="true">
+                <defs>
+                  <linearGradient id="g2" x1="0" x2="1">
+                    <stop offset="0" stop-color="#9b9da2"/><stop offset="1" stop-color="#f0f1f2"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(120,40)">
+                  <rect x="20" y="24" width="220" height="148" rx="42" fill="url(#g2)"/>
+                  <path d="M55 42 C68 18 91 18 104 42 C117 66 139 66 152 42 C165 18 188 18 201 42" fill="none" stroke="#787c82" stroke-width="20" stroke-linecap="round"/>
+                  <circle cx="88" cy="100" r="14" fill="#1f2225"/>
+                  <circle cx="172" cy="100" r="14" fill="#1f2225"/>
+                  <path d="M92 128 Q130 148 168 128" fill="none" stroke="#6e7278" stroke-width="9" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="product-body"><div class="product-top">
+              <span class="pill">АНТИСТРЕСС</span><span class="category-label">Антистресс</span></div>
+              <h3>Игрушки-антистресс</h3>
+              <p>Фиджет-модели и тактильные игрушки для рук, стола и маленьких перерывов.</p>
+              <div class="product-foot">
+                <span class="price">от 350 ₽</span>
+                <a class="small-btn" href="https://t.me/viprinterrr_bot?start=toys" target="_blank" rel="noopener">Заказать</a>
+              </div>
+            </div>
+          </article>
+<article class="product">
+            <div class="product-art">
+              <svg viewBox="0 0 500 280" aria-hidden="true">
+                <defs>
+                  <linearGradient id="g3" x1="0" x2="1">
+                    <stop offset="0" stop-color="#22262b"/><stop offset="1" stop-color="#5a5e64"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(88,32)">
+                  <rect x="18" y="22" width="300" height="180" rx="28" fill="url(#g3)" stroke="#ff6a22" stroke-opacity=".5" stroke-width="4"/>
+                  <rect x="46" y="55" width="92" height="102" rx="16" fill="#141619"/>
+                  <rect x="154" y="55" width="130" height="42" rx="13" fill="#141619"/>
+                  <rect x="154" y="114" width="130" height="43" rx="13" fill="#141619"/>
+                  <circle cx="87" cy="104" r="23" fill="#ff6a22" opacity=".85"/>
+                  <path d="M78 104h18M87 95v18" stroke="#1b1d20" stroke-width="7" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="product-body"><div class="product-top">
+              <span class="pill">ДОМ</span><span class="category-label">Для дома</span></div>
+              <h3>Органайзеры</h3>
+              <p>Для кабелей, стола, инструмента и мелочей — аккуратный порядок без лишнего пластика.</p>
+              <div class="product-foot">
+                <span class="price">от 390 ₽</span>
+                <a class="small-btn" href="https://t.me/viprinterrr_bot?start=organizers" target="_blank" rel="noopener">Заказать</a>
+              </div>
+            </div>
+          </article>
+<article class="product">
+            <div class="product-art">
+              <svg viewBox="0 0 500 280" aria-hidden="true">
+                <g transform="translate(110,36)">
+                  <rect x="30" y="24" width="90" height="150" rx="20" fill="#ff7a34"/>
+                  <rect x="80" y="24" width="90" height="150" rx="20" fill="#3a3f46"/>
+                  <path d="M70 72h30M70 96h30M120 72h30M120 96h30" stroke="#eceff1" stroke-width="7" stroke-linecap="round" opacity=".85"/>
+                  <circle cx="58" cy="136" r="9" fill="#ffccad"/>
+                  <circle cx="108" cy="136" r="9" fill="#d3d7dc"/>
+                  <circle cx="158" cy="136" r="9" fill="#ffccad"/>
+                </g>
+              </svg>
+            </div>
+            <div class="product-body"><div class="product-top">
+              <span class="pill">ПОДАРОК</span><span class="category-label">Подарки</span></div>
+              <h3>Брелоки</h3>
+              <p>Именные, тематические и минималистичные брелоки — маленькая вещь с характером.</p>
+              <div class="product-foot">
+                <span class="price">от 190 ₽</span>
+                <a class="small-btn" href="https://t.me/viprinterrr_bot?start=keychains" target="_blank" rel="noopener">Заказать</a>
+              </div>
+            </div>
+          </article>
+<article class="product">
+            <div class="product-art">
+              <svg viewBox="0 0 500 280" aria-hidden="true">
+                <g transform="translate(90,32)">
+                  <path d="M55 100 L120 45 L185 100 L250 45 L315 100 L250 155 L185 100 L120 155Z" fill="#22262b" stroke="#ff6a22" stroke-width="8" stroke-linejoin="round"/>
+                  <circle cx="185" cy="100" r="28" fill="#ff6a22"/>
+                  <circle cx="185" cy="100" r="9" fill="#17191c"/>
+                </g>
+              </svg>
+            </div>
+            <div class="product-body"><div class="product-top">
+              <span class="pill">НА ЗАКАЗ</span><span class="category-label">На заказ</span></div>
+              <h3>Другие модели</h3>
+              <p>Если нужной вещи нет в каталоге — проверим готовую модель или предложим вариант под задачу.</p>
+              <div class="product-foot">
+                <span class="price">Под заказ</span>
+                <a class="small-btn" href="https://t.me/viprinterrr_bot?start=custom" target="_blank" rel="noopener">Обсудить</a>
+              </div>
+            </div>
+          </article>
+<article class="product">
+            <div class="product-art">
+              <svg viewBox="0 0 500 280" aria-hidden="true">
+                <g transform="translate(105,38)">
+                  <rect x="28" y="22" width="260" height="160" rx="26" fill="#171a1e" stroke="#fff" stroke-opacity=".16"/>
+                  <rect x="55" y="50" width="206" height="32" rx="12" fill="#2a2f35"/>
+                  <rect x="55" y="98" width="92" height="52" rx="14" fill="#ff6a22"/>
+                  <rect x="160" y="98" width="101" height="52" rx="14" fill="#2a2f35"/>
+                  <circle cx="92" cy="124" r="10" fill="#141517"/>
+                </g>
+              </svg>
+            </div>
+            <div class="product-body"><div class="product-top">
+              <span class="pill">ПОЛЕЗНОЕ</span><span class="category-label">Полезное</span></div>
+              <h3>Полезные мелочи</h3>
+              <p>Крепления, подставки, держатели и другие вещи, которые делают повседневность удобнее.</p>
+              <div class="product-foot">
+                <span class="price">от 250 ₽</span>
+                <a class="small-btn" href="https://t.me/viprinterrr_bot?start=utility" target="_blank" rel="noopener">Заказать</a>
+              </div>
+            </div>
+          </article>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-head">
+          <h2>Как мы работаем</h2>
+          <p>Без сложных формальностей: выбрали модель, связались — дальше всё сделаем сами.</p>
+        </div>
+        <div class="why">
+          <div class="why-card">
+            <span class="pill">01 — ПЕЧАТЬ</span>
+            <h3>Акцент на качество</h3>
+            <p>VI Print основан в 2026 году Владом. Печатаем на Bambu Lab A1, используя качественные PLA и PETG — для аккуратной геометрии и приятной поверхности.</p>
+          </div>
+          <div class="why-card">
+            <span class="pill">02 — СВОИМ ХАРАКТЕРОМ</span>
+            <h3>Уникальность вместо масс-маркета</h3>
+            <p>Мы любим модели, которых не увидишь на соседней полке. Поэтому в каталоге есть и готовые хиты, и идеи на заказ.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><h4>Выберите модель</h4><p>Выберите товар из каталога или пришлите свою идею.</p></div>
+          <div class="step"><div class="step-num">2</div><h4>Свяжитесь с нами</h4><p>Напишите в Telegram-бот — уточним цвет, материал и количество.</p></div>
+          <div class="step"><div class="step-num">3</div><h4>Печатаем</h4><p>Подготовим модель к печати и аккуратно изготовим её на Bambu Lab A1.</p></div>
+          <div class="step"><div class="step-num">4</div><h4>Доставка</h4><p>Передадим заказ в доставку. Отправляем по всей России.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>О VI Print</h2>
+          <p>Молодой бренд о тех вещах, которые приятно держать в руках, дарить и использовать каждый день.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card">
+            <span class="eyebrow">Основан в 2026</span>
+            <h3 style="font-size:28px;letter-spacing:-.04em;margin:18px 0 10px">Создано Владом. Напечатано с вниманием к деталям.</h3>
+            <p>VI Print сочетает цифровое моделирование и живое производство: идея начинается на экране, а заканчивается настоящей вещью — с фактурой, весом и своим характером.</p>
+            <div class="specs">
+              <div class="spec"><small>Материалы</small><strong>PLA · PETG</strong></div>
+              <div class="spec"><small>Принтер</small><strong>Bambu Lab A1</strong></div>
+              <div class="spec"><small>География</small><strong>Вся Россия</strong></div>
+              <div class="spec"><small>Фокус</small><strong>Качество + идея</strong></div>
+            </div>
+          </div>
+          <div class="about-card">
+            <span class="pill">ПОЧЕМУ НАС</span>
+            <h3 style="font-size:28px;letter-spacing:-.04em;margin:18px 0 10px">Подарок, полезная мелочь или просто «хочу такую».</h3>
+            <p>Наши модели подойдут тем, кто ценит необычные вещи и не хочет покупать очередной безликий аксессуар. Небольшие тиражи, внимание к деталям и общение напрямую с человеком, который стоит за брендом.</p>
+            <a class="btn btn-secondary" style="margin-top:12px" href="https://t.me/VIprinterr" target="_blank" rel="noopener">Telegram-канал →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <div class="section-head">
+          <h2>Контакты</h2>
+          <p>Можно просто написать. Оператор поможет с выбором, цветом, материалом и заказом.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <span class="pill">НА СВЯЗИ</span>
+            <div class="contact-list">
+              <a class="contact-item" href="https://t.me/VIprinterr" target="_blank" rel="noopener">
+                <span class="icon">TG</span>
+                <span><small>Telegram-канал</small><strong>@VIprinterr</strong></span>
+              </a>
+              <a class="contact-item" href="https://t.me/viprinterrr_bot" target="_blank" rel="noopener">
+                <span class="icon">↗</span>
+                <span><small>Чат-бот / заказ</small><strong>t.me/VIprint_bot</strong></span>
+              </a>
+              <div class="contact-item">
+                <span class="icon">☎</span>
+                <span><small>Телефон</small><strong>Уточняется</strong></span>
+              </div>
+              <div class="contact-item">
+                <span class="icon">@</span>
+                <span><small>Email</small><strong>Уточняется</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <span class="pill">ОСТАВИТЬ ЗАПРОС</span>
+            <h3 style="font-size:26px;letter-spacing:-.04em;margin:16px 0 10px">Расскажите, что нужно напечатать</h3>
+            <form class="form" onsubmit="sendLead(event)">
+              <input class="field" id="name" placeholder="Ваше имя" autocomplete="name" required />
+              <input class="field" id="contact" placeholder="Telegram / телефон" required />
+              <textarea class="field" id="message" placeholder="Что хотите заказать?" required></textarea>
+              <button class="btn btn-primary" type="submit">Отправить запрос в Telegram</button>
+              <p class="form-note">Кнопка откроет Telegram-бот с подготовленным сообщением. Личные данные на сайте не хранятся.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="float-chat" href="https://t.me/viprinterrr_bot" target="_blank" rel="noopener" aria-label="Связаться с оператором">✦</a>
+
+  <footer>
+    <div class="container footer-row">
+      <div class="footer-logo">VI PRINT</div>
+      <div>3D-печать · 2026 · Доставка по России</div>
+      <div>© VI Print</div>
+    </div>
+  </footer>
+
+  <script>
+    function sendLead(event){
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const text =
+        "Здравствуйте! Хочу заказать в VI Print.%0A%0A" +
+        "Имя: " + encodeURIComponent(name) + "%0A" +
+        "Контакт: " + encodeURIComponent(contact) + "%0A" +
+        "Запрос: " + encodeURIComponent(message);
+      window.open("https://t.me/viprinterrr_bot?start=" + encodeURIComponent("lead_" + Date.now()) + "&text=" + encodeURIComponent(
+          "Здравствуйте! Хочу заказать в VI Print.\nИмя: " + name + "\nКонтакт: " + contact + "\nЗапрос: " + message
+      ), "_blank", "noopener");
+    }
+  </script>
+
+<script>
+document.querySelectorAll('.catalog-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.catalog-tab').forEach(x=>x.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
